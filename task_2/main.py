@@ -3,25 +3,29 @@ import json
 
 print("start code")
 
-with open("task_2\\text_1_files", 'r', encoding='utf-8') as file:
+with open("doc.json", 'r', encoding='utf-8') as file:
     data = json.load(file)
     
-input_pk = input("введите номер квалификации: ")   
+input_pk = int(input("введите номер квалификации(1 - 733): "))   
+if input_pk < 734 and input_pk > 0:
+    for object1 in data:
+        if object1["pk"] == input_pk and object1["model"] == "data.skill":
+            obj_1 = object1["fields"]["title"]
+            obj_2 = object1["fields"]["code"]
+            obj_3 = object1["fields"]["specialty"]
+            break
+        if object1["pk"] == input_pk and object1["model"] == "data.specialty":
+            spec = object1["fields"]["title"]
+            spec_code = object1["fields"]["code"]
+            c_type = object1["fields"]["c_type"]
 
-def search_in_data(data,s):
-    if isinstance(data, list):
-        for item in data:
-            result = s(item)
-            if result:
-                return result
-                
-object = search_in_data(data,input_pk)
-
-if object:
-    print("="*10)
-    print("Найдено")
-    print("="*10) 
-    print(f"{"code"} >> специальность {"title"},")
+ 
+    print(" Найдено ".center(50, "="))
+    print(f"{obj_2} >> Специальность \"{spec}\", {c_type}" )
+    print(f"{spec_code} >> Квалификация \"{obj_1}\"")
+else:
+    print(" Не найдено ".center(50, "="))
+    file.close()
 
 
 print("end code")
