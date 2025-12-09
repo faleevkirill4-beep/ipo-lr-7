@@ -4,7 +4,7 @@ import json
 
 print("start code")
 
-filename = r"task_3(2)\fishes.json"
+filename = r"task_3\fishes.json"
 while True:
     
   print("""
